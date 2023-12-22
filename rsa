@@ -16,56 +16,30 @@ Your program should run without any dependency: You will not be able to install 
 Time limit: Your program will be killed after 5 seconds if it hasn’t finished
 Push all your scripts, source code, etc… to your repository
 """
-import sys # gets arguments
-def is_prime(num):
+import sys
+
+# fn unpack number factorial
+def factor():
     """
-    Check if a number is prime."
-    :param num: number
-    :return: True
-    """
-    if num < 2:
-        return False
-    for i in range(2, int(num ** 0.5) + 1):
-        if num % i == 0:
-            return False
-    return True
-
-
-def factorize_rsa(num):
-    """
-    Function to factorize a number into a product of two prime numbers.
-    :param num: kkk
-    :return: none
-    """
-    if num % 2 == 0:
-        print("{}={}*{}".format(num, num // 2, 2))
-        return
-
-    i = 3
-    while i <= num // 2:
-        if num % i == 0 and is_prime(i) and is_prime(num // i):
-            print("{}={}*{}".format(num, num // i, i))
-            return
-        i += 2
-
-    # If the loop completes without finding prime factors, print n=n*1
-    print("{}={}*{}".format(num, num, 1))
-
-
-def main():
-    """
-    Main function to read the file and factorize each number.
+    function fc to search file to convert number and format n=p*q
     """
     try:
         revfile = sys.argv[1]
         with open(revfile) as f:
             for revnumber in f:
                 revnumber = int(revnumber)
-                factorize_rsa(revnumber)
+                if revnumber % 2 == 0:
+                        print("{}={}*{}".format(revnumber, revnumber // 2, 2))
+                        continue
+                i = 3
+                while i < revnumber // 2:
+                    if revnumber % i == 0:
+                        print("{}={}*{}".format(revnumber, revnumber // i, i))
+                        break
+                    i = i + 2
+                if i == (revnumber // 2) + 1:
+                    print("{}={}*{}".format(revnumber, revnumber, 1))
     except (IndexError, FileNotFoundError):
         pass
-
-
 # autostart
-if __name__ == "__main__":
-    main()
+factor()
